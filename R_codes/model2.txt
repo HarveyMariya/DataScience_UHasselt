@@ -1,0 +1,14 @@
+model
+{
+    for (i in 1:n) {
+        y[i] ~ dbin(p[i], Nfetus[i])
+        logit(p[i]) <- alpha + beta * d[i]
+    }
+    alpha ~ dlogis(0.00000E+00, 0.1)
+    beta ~ dlogis(0.00000E+00, 0.1)
+    logit(pi2) <- alpha + beta * 100
+    ypred ~ dbin(pi2, 240)
+    P0 <- exp(alpha)/(1 + exp(alpha))
+    q.star <- (0.05 * (1 - P0)) + P0
+    bmd <- (logit(q.star) - alpha)/beta
+}

@@ -1,0 +1,15 @@
+model
+{
+    for (i in 1:n) {
+        y[i] ~ dbin(p[i], Nfetus[i])
+        if (d[i] > tau) {
+            logit(p[i]) <- alpha + beta * (d[i] - tau)
+        }
+        else {
+            logit(p[i]) <- alpha
+        }
+    }
+    alpha ~ dnorm(0.00000E+00, 1.00000E-04)
+    beta ~ dnorm(0.00000E+00, 1.00000E-04)
+    tau ~ dunif(0.00000E+00, max(d))
+}
