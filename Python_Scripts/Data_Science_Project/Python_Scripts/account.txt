@@ -1,5 +1,0 @@
-100 Jones 24.98
-200 Doe 98.98
-300 Halbert 0.0
-400 White -4.18
-500 Chika 6.33
