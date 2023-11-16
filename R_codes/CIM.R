@@ -346,3 +346,134 @@ for(i in 1:B){
 ## Non-parametric BS
 
 z.i <- c
+
+############################# PROJECT I ####################################
+
+
+
+
+############################# PROJECT II ####################################
+
+
+
+
+############################# PROJECT III ####################################
+# setwd('C:/Users/harve/OneDrive/Documenten/DataScience_UHasselt/R_codes')
+
+# Question 1a
+air <- airquality
+head(air)
+
+hist(air$Wind)
+
+x <- air$Wind
+n <- length(air$Wind)
+B <- 1000
+
+# Vectors to store bootstrap estimates
+mx <- c(1:B)
+mdx <- c(1:B)
+tmx <- c(1:B)
+
+# Bootstrapping
+for (i in 1:B){
+  boot.i <- sample(x, n, replace = T)
+  mx[i] <- mean(boot.i)
+  mdx[i] <- median(boot.i)
+  tmx[i] <- mean(boot.i, trim = 0.1)
+}
+
+# standard error of the mean
+std <- function(x) sd(x)/sqrt(n)
+
+# Calculate the MSE for each estimator
+mse_mx <- mean((mx - mean(x))^2)
+mse_mdx <- mean((mdx - median(x))^2)
+mse_tmx <- mean((tmx - mean(x))^2)
+
+# Print MSE values
+cat("MSE (Sample Mean):", mse_mx, "\n")
+cat("MSE (Sample Median):", mse_mdx, "\n")
+cat("MSE (Trimmed Mean):", mse_tmx, "\n")
+
+
+# Question 1b
+# Jackknife
+
+
+# Question 1c
+
+
+
+# Question 2
+
+# dose, no. of beetles alive, no. of beetles dead, total no. of beetles in the grp
+
+# read the data
+beatle <- read.table('beetle.txt', header=FALSE, na.strings=".", dec=".",
+strip.white=TRUE, col.names=c("dose", "y","z","n"))
+
+head(beatle)
+
+plot(beatle$dose,beatle$y/beatle$n,xlab="DOSE",ylab="prop. of live beetles")
+
+attach(beatle)
+dim(beatle)
+
+# Question 2a
+
+prob_alive <- beatle$y/beatle$n
+prob_dead <- beatle$z/beatle$n
+
+# Formulate the dose-response model
+dose.model <- glm(cbind(z, n - z) ~ dose, data = beatle, family = binomial(link = "logit"))
+
+# Print the model summary
+summary(dose.model)
+
+lines(dose, dose.model$fit)
+
+# Question 2b
+# SAS
+
+# Question 2c
+# Parametric
+
+# Non-Parametric
+
+# Question 2d
+
+# Question 2e
+
+# Question 2f
+
+# Question 3
+
+table1data <- c(80,83,78,88,78,93,88,78,97,103,99,104,103,95,95,97,99)
+doses <- as.factor(c(1,1,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5)) # the first dose level is placebo
+
+# Question 3a
+
+# Question 3b
+
+# Question 4
+
+x<-c(11,6,14,13,13,6,10,9,17,12)
+
+# Question 4a
+
+# Question 4b
+
+# Question 5
+
+x <- c(10,11,7)
+y <- c(19,13,12)
+
+# Question 5a
+
+# Question 5b
+
+x <- c(10, 13, 10, 8, 7, 8, 17, 8, 10, 6)
+y <- c(12, 6, 18, 7, 10, 11, 13, 12, 13, 14)
+
+
