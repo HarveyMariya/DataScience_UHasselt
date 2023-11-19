@@ -3,7 +3,7 @@
 
 # n = 10, p = (0, 1) , 15 independent observations
 sample <- c(7, 1, 5, 1, 3, 3, 3, 3, 6, 5, 4, 5, 3, 2, 4)
-
+sum(sample)
 # Question 1
 # calculating the mean
 np <- mean(sample)
@@ -129,3 +129,21 @@ plot(p, power, type = "l")
 
 
 # Homework II
+# left_part
+# Set values for tilde_p, hat_p, sum_xi, mn, and significance level alpha
+tilde_p <- 0.4
+hat_p <- 0.36667
+sum_xi <- 55
+m <- 15
+n <- 10
+alpha <- 0.05
+df <- 1
+
+numerator <- 2 * sum_xi * (log(tilde_p / (1 - tilde_p)) - log(hat_p / (1 - hat_p)))
+denominator <- m * n * (log(1 - hat_p) - log(1 - tilde_p))
+
+ans <- numerator / denominator
+
+
+
+qchisq(alpha, df, lower.tail = F)
