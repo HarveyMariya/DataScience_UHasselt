@@ -11,7 +11,7 @@ n <- 10
 np
 
 # calculating the probability
-p <- (np/n)
+p <- (np / n)
 
 
 # Question 2
@@ -21,7 +21,7 @@ set.seed(1111)
 n_sim <- 1000
 np_Mom <- as.vector(n_sim)
 
-for (i in 1:n_sim){
+for (i in 1:n_sim) {
   sample_sim <- rbinom(n_sim, n, p)
   np_Mom[i] <- mean(sample_sim)
 }
@@ -38,8 +38,8 @@ SE_Mom
 # Plot the log-likelihood as a product of p
 
 # likelihood function
-log_lk <- function(prob, sample, n){
-  sum(dbinom(sample , size = n, prob = prob, log = TRUE))
+log_lk <- function(prob, sample, n) {
+  sum(dbinom(sample, size = n, prob = prob, log = TRUE))
 }
 
 # probability values
@@ -48,13 +48,15 @@ count_values <- length(prob_values)
 
 ll_values <- as.vector(count_values)
 
-for (i in 1:count_values){
+for (i in 1:count_values) {
   ll_values[i] <- log_lk(prob_values[i], sample, n)
 }
 
-par(mfrow = c(1,1))
-plot(prob_values, ll_values, xlab = "Probability of Success", ylab = "Log-likelihood", 
-     main = "Log-likelihood of a Binomial Distribution", type = "l", lwd = 3)
+par(mfrow = c(1, 1))
+plot(prob_values, ll_values,
+  xlab = "Probability of Success", ylab = "Log-likelihood",
+  main = "Log-likelihood of a Binomial Distribution", type = "l", lwd = 3
+)
 
 
 # Find the MLE for the parameter P and mark it on the plot
@@ -84,10 +86,10 @@ nLL <- function(p_new) {
 for (i in 1:n_sim) {
   # Generate a random sample of size 'n' for each iteration
   sample_sim <- rbinom(n, size = n, prob = p)
-  
+
   # Fit the model and estimate p
   fit <- mle(nLL, start = list(p_new = 0.5))
-  
+
   # Extract the parameter estimate
   np_MLE[i] <- coef(fit)["p_new"]
 }
@@ -98,7 +100,7 @@ mean_MLE
 
 
 # Question 5
-# Find an (approximate) standard error for the maximum 
+# Find an (approximate) standard error for the maximum
 # likelihood estimate using the Fisher information.
 
 np_MLE_sd <- sd(np_MLE)
@@ -119,15 +121,11 @@ np_MLE_CI
 n <- 100
 p <- seq(0.05, 0.95, 0.01)
 
-power <- 1-pnorm((60 - n*p)/sqrt(n*p*(1-p))) + pnorm((40 - n*p)/sqrt(n*p*(1-p)))
+power <- 1 - pnorm((60 - n * p) / sqrt(n * p * (1 - p))) +
+  pnorm((40 - n * p) / sqrt(n * p * (1 - p)))
 
-plot(p, power, type = 'l')
-
-
-
+plot(p, power, type = "l")
 
 
 
-
-
-
+# Homework II
